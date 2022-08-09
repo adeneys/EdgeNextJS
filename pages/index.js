@@ -1,6 +1,26 @@
 import Head from 'next/head'
 
-export default function Home() {
+export async function getStaticProps() {
+  var query = "{item(language:\"en\" path:\"/sitecore/content/home\") {id,name,children {results {id,name}}}}";
+  var body = JSON.stringify({query: query});
+  var response = await fetch(process.env.EDGE_URL + "/api/graphql/v1", {
+    method: "POST",
+    headers: {
+      "X-GQL-Token": process.env.EDGE_TOKEN,
+      "Content-Type": "application/json"
+    },
+    body: body
+  });
+
+  var returnJson = (await response.json())["data"];
+  return {
+    props: {
+      data: returnJson
+    }
+  };
+}
+
+export default function Home({data}) {
   return (
     <div className="container">
       <Head>
@@ -12,6 +32,17 @@ export default function Home() {
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <p>
+          Content from Edge:
+        </p>
+
+        {data.item.children.results.map(({id, name}) => (
+          <div>
+            <p>{id}</p>
+            <p>{name}</p>
+          </div>
+        ))}
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
