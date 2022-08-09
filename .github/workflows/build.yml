@@ -11,6 +11,4 @@ jobs:
         with:
           node-version: 16.x
           cache: "npm"
-        working-directory: src/nextjs-edge
       - run: npm run build
-        working-directory: src/nextjs-edge
