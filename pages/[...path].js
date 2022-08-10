@@ -17,12 +17,34 @@ export async function getStaticProps({params}) {
 }
 
 export async function getStaticPaths() {
+  let routes = [];
+  await getPageRoutes("/", routes);
+
+  // Temporarily remove the home page which is currently handled by the index.js page.
+  // This can be removed once I've got this dynamic page handling the index route.
+  routes = routes.slice(1);
+
   return {
-    paths: [
-      { params: { path: ["/"] }}
-    ],
+    paths: routes,
     fallback: true
   }
+}
+
+async function getPageRoutes(route, routes) {
+  const pathElements = route.substr(1).split("/");
+
+  routes.push(
+    { params: { path: pathElements }}
+  );
+  
+  var page = await pageRepository.getPageRoutes(route);
+
+  page.children.results.map(async child => {
+    var childRoutes = await getPageRoutes(child.url.path, routes);
+    childRoutes.map(x => {
+      routes.push(x);
+    });
+  });
 }
 
 export default function ContentPage({content}) {
