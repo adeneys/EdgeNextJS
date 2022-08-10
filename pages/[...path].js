@@ -6,13 +6,13 @@ import { getPageTitle } from "../util/contentTools";
 
 const pageRepository = new PageRepository();
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({ params }) {
   const content = await pageRepository.getPage("/" + params.path);
 
   return {
-      props: {
-          content: content
-      }
+    props: {
+      content: content
+    }
   };
 }
 
@@ -34,42 +34,38 @@ async function getPageRoutes(route, routes) {
   const pathElements = route.substr(1).split("/");
 
   routes.push(
-    { params: { path: pathElements }}
+    { params: { path: pathElements } }
   );
-  
-  var page = await pageRepository.getPageRoutes(route);
 
-  page.children.results.map(async child => {
-    var childRoutes = await getPageRoutes(child.url.path, routes);
-    childRoutes.map(x => {
-      routes.push(x);
-    });
-  });
+  var page = await pageRepository.getPageRoutes(route);
+  await Promise.all(page.children.results.map(async child => {
+    await getPageRoutes(child.url.path, routes);
+  }));
 }
 
-export default function ContentPage({content}) {
-  if(content == null)
-  return (
-    <div>Not found</div>
-  )
+export default function ContentPage({ content }) {
+  if (content == null)
+    return (
+      <div>Not found</div>
+    )
 
   let list = [];
-  if(content.children && content.children.results)
-      list = content.children.results;
+  if (content.children && content.children.results)
+    list = content.children.results;
 
   return (
-      <div>
-          <Head>
-              <title>{getPageTitle(content)}</title>
-          </Head>
-          <PageHeader data={getPageTitle(content)} />
-          <section className="contentHolder">
-              <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
-          </section>
-          <main className="contentHolder">
-              <h2>Pages</h2>
-              <ChildList data={list}/>
-          </main>
-      </div>
+    <div>
+      <Head>
+        <title>{getPageTitle(content)}</title>
+      </Head>
+      <PageHeader data={getPageTitle(content)} />
+      <section className="contentHolder">
+        <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
+      </section>
+      <main className="contentHolder">
+        <h2>Pages</h2>
+        <ChildList data={list} />
+      </main>
+    </div>
   )
 }
