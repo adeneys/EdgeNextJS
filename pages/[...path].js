@@ -7,7 +7,8 @@ import { getPageTitle } from "../util/contentTools";
 const pageRepository = new PageRepository();
 
 export async function getStaticProps({ params }) {
-  const content = await pageRepository.getPage("/" + params.path);
+  const path = "/" + params.path.join("/");
+  const content = await pageRepository.getPage(path);
 
   return {
     props: {
@@ -46,7 +47,7 @@ async function getPageRoutes(route, routes) {
 export default function ContentPage({ content }) {
   if (content == null)
     return (
-      <div>Not found</div>
+      <div>Page not found on Experience Edge</div>
     )
 
   let list = [];
