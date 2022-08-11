@@ -21,8 +21,7 @@ export async function getStaticPaths() {
   let routes = [];
   await getPageRoutes("/", routes);
 
-  // Temporarily remove the home page which is currently handled by the index.js page.
-  // This can be removed once I've got this dynamic page handling the index route.
+  // Remove the home page which is currently handled by the index.js page.
   routes = routes.slice(1);
 
   return {
@@ -33,12 +32,15 @@ export async function getStaticPaths() {
 
 async function getPageRoutes(route, routes) {
   const pathElements = route.substr(1).split("/");
+  var page = await pageRepository.getPageRoutes(route);
+
+  if (!page)
+    return;
 
   routes.push(
     { params: { path: pathElements } }
   );
 
-  var page = await pageRepository.getPageRoutes(route);
   await Promise.all(page.children.results.map(async child => {
     await getPageRoutes(child.url.path, routes);
   }));
