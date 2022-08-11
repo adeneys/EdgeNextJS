@@ -1,27 +1,23 @@
 import Head from "next/head";
 import PageHeader from "../components/pageHeader";
 import ChildList from "../components/childList";
-import Quote from "../components/quote";
+import RandomQuote from "../components/randomQuote";
 import PageRepository from "../contentSource/pageRepository";
-import QuoteRepository from "../contentSource/quoteRepository";
 import { getPageTitle } from "../util/contentTools";
 
 const pageRepository = new PageRepository();
-const quoteRepository = new QuoteRepository();
 
 export async function getStaticProps() {
     const content = await pageRepository.getPage("/");
-    const quote = await quoteRepository.getRandomQuote();
 
     return {
         props: {
-            content: content,
-            quote: quote
+            content: content
         }
     };
 }
 
-export default function Home({content, quote}) {
+export default function Home({content}) {
     let list = [];
     if(content.children && content.children.results)
         list = content.children.results;
@@ -34,7 +30,7 @@ export default function Home({content, quote}) {
             <PageHeader data={getPageTitle(content)} />
             <section className="contentHolder">
                 <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
-                <Quote quote={quote}/>
+                <RandomQuote />
             </section>
             <main className="contentHolder">
                 <h2>Pages</h2>
