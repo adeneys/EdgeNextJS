@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Content({data}) {
+export default function Content({ data }) {
     return (
         <div id="header">
             <div className="contentHolder">

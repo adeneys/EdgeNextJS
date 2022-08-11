@@ -1,5 +1,6 @@
 import Head from "next/head";
 import PageHeader from "../components/pageHeader";
+import BannerImage from "../components/bannerImage";
 import ChildList from "../components/childList";
 import PageRepository from "../contentSource/pageRepository";
 import { getPageTitle } from "../util/contentTools";
@@ -62,6 +63,7 @@ export default function ContentPage({ content }) {
         <title>{getPageTitle(content)}</title>
       </Head>
       <PageHeader data={getPageTitle(content)} />
+      <BannerImage imageJson={content.bannerImage.jsonValue} />
       <section className="contentHolder">
         <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
       </section>

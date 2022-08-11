@@ -31,6 +31,11 @@ ul li {
     margin: auto;
 }
 
+.bannerImageHolder {
+    width: 800px;
+    margin: auto;
+}
+
 #header {
     background-color: #444444;
     margin: 0;
@@ -41,7 +46,12 @@ ul li {
     color: #cccccc
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #666666
 }
 
@@ -80,5 +90,4 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0.5em 0;
     padding: 0.5em;
     background-color: #dddddd;
-
 }

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import PageHeader from "../components/pageHeader";
+import BannerImage from "../components/bannerImage";
 import ChildList from "../components/childList";
 import RandomQuote from "../components/randomQuote";
 import PageRepository from "../contentSource/pageRepository";
@@ -17,9 +18,9 @@ export async function getStaticProps() {
     };
 }
 
-export default function Home({content}) {
+export default function Home({ content }) {
     let list = [];
-    if(content.children && content.children.results)
+    if (content.children && content.children.results)
         list = content.children.results;
 
     return (
@@ -28,13 +29,14 @@ export default function Home({content}) {
                 <title>{getPageTitle(content)}</title>
             </Head>
             <PageHeader data={getPageTitle(content)} />
+            <BannerImage imageJson={content.bannerImage.jsonValue} />
             <section className="contentHolder">
                 <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
                 <RandomQuote />
             </section>
             <main className="contentHolder">
                 <h2>Pages</h2>
-                <ChildList data={list}/>
+                <ChildList data={list} />
             </main>
         </div>
     )

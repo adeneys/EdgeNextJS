@@ -13,6 +13,9 @@ class PageRepository {
                 text: field(name: "text") {
                   value
                 }
+                bannerImage: field(name: "banner image") {
+                  jsonValue
+                }
                 children {
                   results {
                     ...commonItemFields

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default function ChildList({ data }) {
-    if(data.length == 0)
+    if (data.length == 0)
         return (
             <div>
                 <p>No pages</p>
