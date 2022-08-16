@@ -40,7 +40,7 @@ class PageRepository {
       "site": "website",
       "language": "en",
       "path": route
-    }
+    };
 
     var layoutResponse = await this.edgeClient.fetch(query, variables);
     if (layoutResponse && layoutResponse.layout && layoutResponse.layout.item)

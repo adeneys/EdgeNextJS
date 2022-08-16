@@ -1,5 +1,4 @@
 export default function BannerImage({ imageJson }) {
-    console.log(imageJson);
     if (!imageJson || !imageJson.value || !imageJson.value.src)
         return null;
 
