@@ -1,12 +1,7 @@
-import getConfig from 'next/config'
-import EdgeClient from "../contentSource/edgeClient";
 import QuoteRepository from "../contentSource/quoteRepository";
 import useSWR from "swr"
 
-// This component is rendered client side, so need config for that.
-const { publicRuntimeConfig } = getConfig()
-const edgeClient = new EdgeClient(publicRuntimeConfig.edgeUrl, publicRuntimeConfig.edgeToken);
-const quoteRepository = new QuoteRepository(edgeClient);
+const quoteRepository = new QuoteRepository();
 const fetcher = async () => await quoteRepository.getRandomQuote();
 
 export default function RandomQuote() {

@@ -1,7 +1,7 @@
 class EdgeClient {
     constructor(url, token) {
-        this.url = (url || process.env.EDGE_URL) + "/api/graphql/v1";
-        this.token = token || process.env.EDGE_TOKEN;
+        this.url = (url || process.env.NEXT_PUBLIC_EDGE_URL || process.env.EDGE_URL) + "/api/graphql/v1";
+        this.token = token ||process.env.NEXT_PUBLIC_EDGE_TOKEN || process.env.EDGE_TOKEN;
     }
 
     async fetch(query, variables) {

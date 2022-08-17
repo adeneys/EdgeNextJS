@@ -19,6 +19,12 @@ export async function getStaticProps() {
 }
 
 export default function Home({ content }) {
+    if(!content) {
+        return (
+            <div>Page not found</div>
+        )
+    }
+
     let list = [];
     if (content.children && content.children.results)
         list = content.children.results;

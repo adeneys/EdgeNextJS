@@ -1,4 +1,4 @@
 node_modules/
 .next/
 out/
-setup-env.cmd
+.env.local
