@@ -36,6 +36,8 @@ jobs:
         env:
           EDGE_URL: ${{ secrets.EDGE_URL }}
           EDGE_TOKEN: ${{ secrets.EDGE_TOKEN }}
+          NEXT_PUBLIC_EDGE_URL: ${{ secrets.NEXT_PUBLIC_EDGE_URL }}
+          NEXT_PUBLIC_EDGE_TOKEN: ${{ secrets.NEXT_PUBLIC_EDGE_TOKEN }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
