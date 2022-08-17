@@ -19,11 +19,10 @@ export async function getStaticProps() {
 }
 
 export default function Home({ content }) {
-    if(!content) {
+    if(!content)
         return (
-            <div>Page not found</div>
+            <div>Page not found on Experience Edge</div>
         )
-    }
 
     let list = [];
     if (content.children && content.children.results)

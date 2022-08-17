@@ -48,7 +48,7 @@ async function getPageRoutes(route, routes) {
 }
 
 export default function ContentPage({ content }) {
-  if (content == null)
+  if(!content)
     return (
       <div>Page not found on Experience Edge</div>
     )
