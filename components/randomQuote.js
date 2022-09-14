@@ -7,14 +7,19 @@ const fetcher = async () => await quoteRepository.getRandomQuote();
 export default function RandomQuote() {
     const { data, error } = useSWR("quote", fetcher);
 
-    if (error) return (<p>Failed to load quote</p>);
-    if (!data) return (<p className="loading">Loading quote...</p>);
-    const text = data.text.value ?? "No quote";
+    var body = (<p>Nothing</p>);
+
+    if (error)
+        body = (<p>Failed to load quote</p>);
+    else if (!data)
+        body = (<p>Loading quote...</p>);
+    else
+        body = (<p>{data.text.value ?? "No quote"}</p>);
 
     return (
         <section className="quote">
             <h2>Quote</h2>
-            <p>{text}</p>
+            {body}
         </section>
     )
 }

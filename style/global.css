@@ -27,12 +27,12 @@ ul li {
 }
 
 .contentHolder {
-    width: 800px;
+    width: 1000px;
     margin: auto;
 }
 
 .bannerImageHolder {
-    width: 800px;
+    width: 1000px;
     margin: auto;
 }
 
@@ -90,4 +90,12 @@ h6 {
     margin: 0.5em 0;
     padding: 0.5em;
     background-color: #dddddd;
+}
+
+.quote {
+    max-width: 200px;
+    margin-left: 2em;
+    padding: 0 1em 1em 1em;
+    float: right;
+    background-color: #eeeeee;
 }

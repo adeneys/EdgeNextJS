@@ -36,8 +36,8 @@ export default function Home({ content }) {
             <PageHeader data={getPageTitle(content)} />
             <BannerImage imageJson={content.bannerImage.jsonValue} />
             <section className="contentHolder">
-                <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
                 <RandomQuote />
+                <div dangerouslySetInnerHTML={{ __html: content.text.value }}></div>
             </section>
             <main className="contentHolder">
                 <h2>Pages</h2>

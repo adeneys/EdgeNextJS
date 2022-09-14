@@ -4,7 +4,7 @@ export default function BannerImage({ imageJson }) {
 
     return (
         <section className="bannerImageHolder">
-            <img src={imageJson.value.src} width="800" height="100" />
+            <img src={imageJson.value.src} width={imageJson.value.width} height={imageJson.value.height} />
         </section>
     )
 }
